@@ -1,4 +1,5 @@
-﻿using SecondAPIAngularAssignment.Model;
+﻿using SecondAPIAngularAssignment.DTO;
+using SecondAPIAngularAssignment.Model;
 
 namespace SecondAPIAngularAssignment.Repository.Interface
 {
@@ -6,7 +7,7 @@ namespace SecondAPIAngularAssignment.Repository.Interface
     {
         Task<List<Carousel>> GetAllCarousel();
         Task<Carousel> CheckImageUrlExistsInCarousel(string imageUrl);
-        Task<Carousel> AddedCarousel(Carousel carousel);
+        Task<Carousel> AddedCarousel(CarouselRequestDTO carousel);
         void DeletedCarousel(Carousel carousel);
     }
 }

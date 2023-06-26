@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SecondAPIAngularAssignment.Constants;
+using SecondAPIAngularAssignment.DTO;
 using SecondAPIAngularAssignment.Model;
 using SecondAPIAngularAssignment.Repository.Interface;
 
@@ -41,7 +42,7 @@ namespace SecondAPIAngularAssignment.Controllers
 
         [HttpPost]
         [Route(Constant.AddCarousel)]
-        public async Task<IActionResult> AddCarousel(Carousel carousel)
+        public async Task<IActionResult> AddCarousel(CarouselRequestDTO carouselRequestDTO)
         {
             try
             {
@@ -50,13 +51,13 @@ namespace SecondAPIAngularAssignment.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var carouselRecord = await _iCarouselRepository.CheckImageUrlExistsInCarousel(carousel.ImageUrl);
+                var carouselRecord = await _iCarouselRepository.CheckImageUrlExistsInCarousel(carouselRequestDTO.ImageUrl);
                 if (carouselRecord != null)
                 {
                     return Conflict(Constant.TheRecordAlreadyExists);
                 }
 
-                var result = await _iCarouselRepository.AddedCarousel(carousel);
+                var result = await _iCarouselRepository.AddedCarousel(carouselRequestDTO);
 
                 return Created($"/{result.Id}", result);
             }
@@ -68,7 +69,7 @@ namespace SecondAPIAngularAssignment.Controllers
 
         [HttpDelete]
         [Route(Constant.DeleteCarousel)]
-        public async Task<IActionResult> DeleteEmployee(string imageUrl)
+        public async Task<IActionResult> DeleteCarousel(string imageUrl)
         {
             try
             {
