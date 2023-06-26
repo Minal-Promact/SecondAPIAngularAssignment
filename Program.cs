@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SecondAPIAngularAssignment.AutomapperConfig;
 using SecondAPIAngularAssignment.Data;
+using SecondAPIAngularAssignment.Repository.Implementation;
+using SecondAPIAngularAssignment.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,8 @@ builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+builder.Services.AddScoped<ICarouselRepository, CarouselRepository>();
 
 var app = builder.Build();
 
@@ -28,7 +33,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseResponseCaching();
+app.UseCors("AllowAngularOrigins");
 app.MapControllers();
 
 app.Run();

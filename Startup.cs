@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SecondAPIAngularAssignment.Data;
+using SecondAPIAngularAssignment.Repository.Implementation;
+using SecondAPIAngularAssignment.Repository.Interface;
 
 namespace SecondAPIAngularAssignment
 {
@@ -40,6 +42,7 @@ namespace SecondAPIAngularAssignment
                                         .AllowAnyMethod();
                 });
             });
+            services.AddScoped<ICarouselRepository, CarouselRepository>();
 
         }
         public void Configure(WebApplication app, IWebHostEnvironment env)
