@@ -8,9 +8,7 @@ using SecondAPIAngularAssignment.Repository.Interface;
 
 namespace SecondAPIAngularAssignment.Controllers
 {
-    [EnableCors("AllowAngularOrigins")]
-    [Route(Constant.Route)]
-    [ApiController]
+    [Route("api/[controller]")]
     public class CarouselController : ControllerBase
     {
         private readonly ICarouselRepository _iCarouselRepository;
@@ -20,8 +18,7 @@ namespace SecondAPIAngularAssignment.Controllers
             this._iCarouselRepository = iCarouselRepository;
         }
 
-        [HttpGet]
-        [Route(Constant.GetAllCarousel)]
+        [HttpGet]        
         public async Task<IActionResult> GetAllCarousel()
         {
             try
@@ -41,8 +38,8 @@ namespace SecondAPIAngularAssignment.Controllers
         }
 
         [HttpPost]
-        [Route(Constant.AddCarousel)]
-        public async Task<IActionResult> AddCarousel(CarouselRequestDTO carouselRequestDTO)
+        
+        public async Task<IActionResult> AddCarousel([FromBody] CarouselRequestDTO carouselRequestDTO)
         {
             try
             {
@@ -67,15 +64,14 @@ namespace SecondAPIAngularAssignment.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route(Constant.DeleteCarousel)]
-        public async Task<IActionResult> DeleteCarousel(string imageUrl)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCarousel(int id)
         {
             try
             {
-                if (imageUrl == string.Empty) return BadRequest(Constant.EnterImageUrl);
+                if (id == 0) return BadRequest(Constant.EnterId);
 
-                var carouselRecord = await _iCarouselRepository.CheckImageUrlExistsInCarousel(imageUrl);
+                var carouselRecord = await _iCarouselRepository.CheckIdExistsInCarousel(id);
                 if (carouselRecord != null)
                 {
                     _iCarouselRepository.DeletedCarousel(carouselRecord);

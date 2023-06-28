@@ -29,6 +29,11 @@ namespace SecondAPIAngularAssignment.Repository.Implementation
             return await dbContext.Carousels.FirstOrDefaultAsync(a => a.ImageUrl == imageUrl);
         }
 
+        public async Task<Carousel> CheckIdExistsInCarousel(int id)
+        {
+            return await dbContext.Carousels.FirstOrDefaultAsync(a => a.Id == id);
+        }
+
         public async Task<Carousel> AddedCarousel(CarouselRequestDTO carouselRequestDTO)
         {
             var carousel = _iMapper.Map<CarouselRequestDTO, Carousel>(carouselRequestDTO);

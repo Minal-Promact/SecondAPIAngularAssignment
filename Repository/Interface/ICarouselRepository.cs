@@ -7,6 +7,7 @@ namespace SecondAPIAngularAssignment.Repository.Interface
     {
         Task<List<Carousel>> GetAllCarousel();
         Task<Carousel> CheckImageUrlExistsInCarousel(string imageUrl);
+        Task<Carousel> CheckIdExistsInCarousel(int id);
         Task<Carousel> AddedCarousel(CarouselRequestDTO carousel);
         void DeletedCarousel(Carousel carousel);
     }
