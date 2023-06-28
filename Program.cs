@@ -33,8 +33,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseResponseCaching();
-app.UseCors("AllowAngularOrigins");
 app.MapControllers();
 
 app.Run();

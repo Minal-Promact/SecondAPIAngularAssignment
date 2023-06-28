@@ -8,7 +8,7 @@
         public const string AddCarousel = "AddCarousel";        
         public const string DeleteCarousel = "DeleteCarousel";
 
-        public const string EnterImageUrl = "Enter Image Url";
+        public const string EnterId = "Enter Id";
         public const string CouldNotFetchCarouselData = "Could not fetch employee data.";
 
         public const string RecordNotFound = "Record not found..";
